@@ -5,12 +5,14 @@ import java.util.Scanner;
 public class TicTacToe {
     public static Scanner sc = new Scanner(System.in);
     public static char[] board = new char[10];
+    public static char userChoice;
 
     public static void main(String[] args) {
         System.out.println("Welcome to Tic-Tac-Toe Game");
         createBoard();
         chooseChoice();
         showBoard();
+        selectIndex();
     }
 
     public static void createBoard() {
@@ -29,18 +31,28 @@ public class TicTacToe {
             System.out.println("     |     |     ");
     }
     static void chooseChoice() {
-        System.out.println("Choose x or 0");
-        char a = sc.next().charAt(0);
-        if (a == '0') {
-            System.out.println("Player choice is " + a);
+        System.out.println("Choose x or o");
+        userChoice = sc.next().charAt(0);
+        if (userChoice == 'o') {
+            System.out.println("Player choice is " + userChoice);
             System.out.println("Computer choice is x");
-        } else if (a == 'x') {
-            System.out.println("Player choice is " + a);
-            System.out.println("Computer choice is 0");
+        } else if (userChoice == 'x') {
+            System.out.println("Player choice is " + userChoice);
+            System.out.println("Computer choice is o");
         } else {
             System.out.println("Entered wrong input");
+            chooseChoice();
         }
-
+    }
+    public static void selectIndex() {
+        System.out.print("Select number between 1 and 9 :");
+        int indexNumber = sc.nextInt();
+        for (int i = 0; i < board.length; i++) {
+            if ((i) == indexNumber) {
+                board[i] = userChoice;
+            }
+        }
+        showBoard();
     }
 
 }
