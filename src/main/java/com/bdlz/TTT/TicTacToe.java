@@ -24,10 +24,23 @@ public class TicTacToe {
         }
 
     }
+    public static void showBoard() {
+        int count = 1;
+        int board[][] = new int[3][3];
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board.length; j++) {
+                board[i][j] = count++;
+                System.out.print(board[i][j] + " ");
+            }
+            System.out.println(" ");
+        }
+
+    }
 
     public static void main(String[] args) {
         System.out.println("Welcome to Tic-Tac-Toe Game");
         createBoard();
         chooseChoice();
+        showBoard();
     }
 }
