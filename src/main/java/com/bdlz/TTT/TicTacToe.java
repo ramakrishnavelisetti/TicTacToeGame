@@ -1,20 +1,32 @@
 package com.bdlz.TTT;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class TicTacToe {
     public static Scanner sc = new Scanner(System.in);
+    private static final Random random = new Random();
     public static char[] board = new char[10];
-    public static char userChoice;
-    public static int indexNumber;
+    public static char userChoice, computerChoice;
+    public static int indexNumber, computerIndex;
+    public static int turn = 1, flag = 0;
 
     public static void main(String[] args) {
         System.out.println("Welcome to Tic-Tac-Toe Game");
         createBoard();
         chooseChoice();
+        tossCoin();
         currentBoard();
         selectIndex();
         freeSpaceMove();
+        while (flag == 0) {
+            if ((turn + 1) % 2 == 0) {
+                currentBoard();
+                chooseChoice();
+                freeSpaceMove();
+                turn++;
+            }
+        }
     }
 
     public static void createBoard() {
@@ -75,5 +87,30 @@ public class TicTacToe {
             System.out.println(userChoice + " user is marked " + indexNumber);
         }
     }
-
+    private static void tossCoin() {
+        System.out.println("Toss a to check who plays first Choose 1 for Head or 2 for Tail");
+        int option = sc.nextInt();
+        if (option == 1 || option == 2) {
+            int toss = random.nextInt(2)+ 1;
+            if (toss == 1) {
+                System.out.println("By tossing Coin it shows HEAD");
+            } else {
+                System.out.println("By tossing Coin it shows TAIL");
+            }
+            if (toss == option) {
+                System.out.println("User will start the game");
+            } else {
+                System.out.println("Computer will start the game");
+                computerFirstTurn();
+            }
+        } else {
+            System.out.println("Invalid input Again");
+            tossCoin();
+        }
+    }
+    public static void computerFirstTurn() {
+        computerIndex = random.nextInt(9) + 1;
+        board[computerIndex] = computerChoice;
+        System.out.println("Computer choses '" + computerIndex + "' now user turn");
+    }
 }
