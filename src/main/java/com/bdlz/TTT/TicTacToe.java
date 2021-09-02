@@ -11,7 +11,7 @@ public class TicTacToe {
         System.out.println("Welcome to Tic-Tac-Toe Game");
         createBoard();
         chooseChoice();
-        showBoard();
+        currentBoard();
         selectIndex();
     }
 
@@ -19,6 +19,14 @@ public class TicTacToe {
         for (int i = 1; i < board.length; i++) {
             board[i] = ' ';
         }
+    }
+    private static void currentBoard() {
+        for (int i = 1; i < 10; i++) {
+            if (board[i] != 'x' && board[i] != 'o') {
+                board[i] = (char) (i + '0');
+            }
+        }
+        showBoard();
     }
     public static void showBoard() {
             System.out.println();
@@ -52,7 +60,7 @@ public class TicTacToe {
                 board[i] = userChoice;
             }
         }
-        showBoard();
+        currentBoard();
     }
 
 }
