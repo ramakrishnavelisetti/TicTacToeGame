@@ -6,6 +6,7 @@ public class TicTacToe {
     public static Scanner sc = new Scanner(System.in);
     public static char[] board = new char[10];
     public static char userChoice;
+    public static int indexNumber;
 
     public static void main(String[] args) {
         System.out.println("Welcome to Tic-Tac-Toe Game");
@@ -13,6 +14,7 @@ public class TicTacToe {
         chooseChoice();
         currentBoard();
         selectIndex();
+        freeSpaceMove();
     }
 
     public static void createBoard() {
@@ -54,13 +56,24 @@ public class TicTacToe {
     }
     public static void selectIndex() {
         System.out.print("Select number between 1 and 9 :");
-        int indexNumber = sc.nextInt();
+         indexNumber = sc.nextInt();
         for (int i = 0; i < board.length; i++) {
             if ((i) == indexNumber) {
                 board[i] = userChoice;
             }
         }
         currentBoard();
+    }
+    private static void freeSpaceMove() {
+        if (board[indexNumber] == 'x' || board[indexNumber] == 'o') {
+            currentBoard();
+            System.out.println("Number which is selected is not free");
+            selectIndex();
+            freeSpaceMove();
+        } else {
+            board[indexNumber] = userChoice;
+            System.out.println(userChoice + " user is marked " + indexNumber);
+        }
     }
 
 }
